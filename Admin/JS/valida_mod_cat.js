@@ -1,16 +1,20 @@
 document.getElementById('btnAgregar').addEventListener('click', function(event) {
     event.preventDefault();
 
-    const nombre = document.getElementById('nombre').value;
+    const nombre = document.getElementById('nombre').value.trim();
+    const errorCategoria = document.getElementById('errorCategoria');
     
-
-    document.getElementById('errorCategoria').innerText = "";
-    
-
+    errorCategoria.innerText = "";
     let isValid = true;
 
+    // Expresión regular: solo letras (mayúsculas y minúsculas), sin números ni símbolos
+    const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ\s]+$/;
+
     if (nombre === "") {
-        document.getElementById('errorCategoria').innerText = "Por favor, completa este campo.";
+        errorCategoria.innerText = "Por favor, completa este campo.";
+        isValid = false;
+    } else if (!regex.test(nombre)) {
+        errorCategoria.innerText = "Solo se permiten letras.";
         isValid = false;
     }
 
