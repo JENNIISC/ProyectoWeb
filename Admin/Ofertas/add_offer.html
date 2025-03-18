@@ -272,6 +272,19 @@
           </div>
         </nav>
         <div
+          id="container_Select"
+          class="d-flex flex row justify-content-center"
+        >
+        <label for="select">Elegir Producto:</label>
+          <select name="select-prod" id="select">
+            <option value="value1">Extractor</option>
+            <option value="value2">Pilar de auto</option>
+            <option value="value3">Piedra</option>
+            <option value="value4">Molino</option>
+            <option value="value5">Plaguicida</option>
+          </select>
+        </div>
+        <div
           class="d-flex justify-content-center align-items-center"
           id="content"
         >
@@ -296,7 +309,6 @@
               <form novalidate>
                 <div class="mb-3">
                   <label
-                  
                     class="form-label"
                     for="nombre"
                     style="color: rgb(0, 0, 0)"
@@ -307,7 +319,8 @@
                     type="text"
                     id="nombre"
                     required=""
-                  /><div id="errorNombre" class="text-danger"></div>
+                  />
+                  <div id="errorNombre" class="text-danger"></div>
                 </div>
                 <div class="mb-3">
                   <label
@@ -321,23 +334,25 @@
                     type="text"
                     id="descripcion"
                     required=""
-                  /><div id="errorDescripcion" class="text-danger"></div>
+                  />
+                  <div id="errorDescripcion" class="text-danger"></div>
                 </div>
                 <div class="mb-3">
                   <label
                     class="form-label"
                     for="codigo-1"
                     style="color: rgb(0, 0, 0)"
-                    >Buscar Producto:</label
+                    >Precio Normal:</label
                   >
-                  <input id="sProducto" class="form-control" type="search" /><div id="errorsProduct" class="text-danger"></div>
+                  <input id="sProducto" class="form-control" type="search" />
+                  <div id="errorsProduct" class="text-danger"></div>
                 </div>
                 <div class="mb-3">
                   <label
                     class="form-label"
                     for="existencia"
                     style="color: rgb(0, 0, 0)"
-                    >Descuento:</label
+                    >Precio con Descuento:</label
                   >
                   <input
                     id="descuento"
@@ -345,7 +360,8 @@
                     type="number"
                     id="descuento"
                     required=""
-                  /><div id="errorDescuento" class="text-danger"></div>
+                  />
+                  <div id="errorDescuento" class="text-danger"></div>
                 </div>
                 <div class="mb-3">
                   <label
@@ -361,32 +377,7 @@
                   />
                 </div>
                 <div class="mb-3">
-                  <label
-                    class="form-label"
-                    for="categoria-1"
-                    style="color: rgb(0, 0, 0)"
-                    >Estado de la Oferta:</label
-                  >
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      id="formCheck-1"
-                      name="check"
-                    /><label class="form-check-label" for="formCheck-1"
-                      >Activo</label
-                    >
-                  </div>
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      id="formCheck-2"
-                      name="check"
-                    /><label class="form-check-label" for="formCheck-2"
-                      >Inactivo</label
-                    >
-                  </div><div id="errorEstadoOferta" class="text-danger"></div>
+                  <div id="errorEstadoOferta" class="text-danger"></div>
                 </div>
                 <div class="d-flex justify-content-end gap-2">
                   <button
