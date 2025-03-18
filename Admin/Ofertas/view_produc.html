@@ -273,12 +273,18 @@
                         id="ipi-table"
                       >
                         <thead class="thead-dark">
-                          <tr>
+                          <tr data-id="1">
                             <th
                               class="text-center"
                               style="background: var(--bs-info)"
                             >
-                              Nombre de la oferta
+                              Nombre del Producto
+                            </th>
+                            <th
+                              class="text-center"
+                              style="background: var(--bs-info)"
+                            >
+                              Descripción
                             </th>
                             <th
                               class="text-center"
@@ -300,12 +306,6 @@
                             </th>
 
                             <th
-                              class="text-center"
-                              style="background: var(--bs-info)"
-                            >
-                              Estado de la oferta
-                            </th>
-                            <th
                               class="text-center filter-false sorter-false"
                               style="background: var(--bs-info); width: 150px"
                             >
@@ -314,8 +314,15 @@
                           </tr>
                         </thead>
                         <tbody class="text-center">
-                          <tr>
+                          <tr data-id="2">
                             <td>Molino</td>
+                            <td>
+                              Lorem ipsum dolor sit amet, consectetur
+                              adipisicing elit. Placeat modi in, nihil nostrum
+                              magni numquam repudiandae ut, adipisci accusamus
+                              deleniti expedita corporis odit ex quidem ipsa!
+                              Iusto quos quis quibusdam!
+                            </td>
                             <td>500</td>
                             <td>250</td>
                             <td>
@@ -325,14 +332,15 @@
                               />
                             </td>
 
-                            <td>Activo</td>
                             <td
                               class="text-center align-middle"
                               style="max-height: 60px; height: 60px"
                             >
+                              <!-- Botones de acciones -->
                               <a
                                 class="btn"
                                 role="button"
+                                onclick="editButtonClick(this)"
                                 href="../Edición%20de%20Productos/modify_offer.html"
                                 style="background: #f6c23e"
                                 ><svg
@@ -370,6 +378,13 @@
                           </tr>
                           <tr>
                             <td>Plaguicida</td>
+                            <td>
+                              Lorem ipsum dolor sit amet consectetur adipisicing
+                              elit. Possimus blanditiis nam beatae fugit.
+                              Doloribus voluptatum provident officiis fuga unde,
+                              quod illo quam incidunt libero natus animi ullam
+                              exercitationem voluptatem! Enim.
+                            </td>
                             <td>300</td>
                             <td>175</td>
                             <td>
@@ -378,8 +393,7 @@
                                 style="width: 75px; height: auto"
                               />
                             </td>
-                            
-                            <td>Inactivo</td>
+
                             <td
                               class="text-center align-middle"
                               style="max-height: 60px; height: 60px"
@@ -387,6 +401,7 @@
                               <a
                                 class="btn"
                                 role="button"
+                                onclick="editButtonClick(this)"
                                 href="../Edición%20de%20Productos/modify_offer.html"
                                 style="
                                   color: var(--bs-black);
@@ -494,5 +509,11 @@
     <script src="../assets/js/TableZoomSorter.js"></script>
     <script src="../assets/js/Tema_Admin.js"></script>
     <script src="../assets/js/WaveClickFX.js"></script>
+    <script src="../JS/ofertas/get_values_table_offer.js"></script>
+    <script>
+      function editButtonClick(button) {
+        getTableValues(button);
+      }
+    </script>
   </body>
 </html>
