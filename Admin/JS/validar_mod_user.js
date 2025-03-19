@@ -14,6 +14,14 @@ function togglePasswords() {
     confirmPasswordField.type = type;
 }
 
+// Almacenar las contraseñas de los usuarios
+const contraseñasUsuarios = {
+    "Yesid@gmail.com": "Yessid1!",
+    "Efrain@gmail.com": "Efrain1!",
+    "Trino@gmail.com": "Trino12!",
+    "Guero@gmail.com": "Guero12!"
+};
+
 function ValidarContraseña(contraseña) {
     let errorMensaje = "";
 
@@ -34,6 +42,24 @@ function ValidarContraseña(contraseña) {
     document.getElementById('errorContraseña').innerText = errorMensaje;
     return errorMensaje === ""; // Devuelve true si la contraseña es válida
 }
+
+// Función para validar la contraseña anterior o actual
+function validarContraseñaAnterior() {
+    let usuario = document.getElementById('usuario').value; // Obtener el usuario seleccionado
+    let contraseñaAct = document.getElementById('contraseñaAct').value; // Obtener la contraseña ingresada
+
+    // Obtener la contraseña real del usuario desde el objeto
+    let contraseñaReal = contraseñasUsuarios[usuario];
+
+    if (contraseñaReal && contraseñaAct !== contraseñaReal) {
+        document.getElementById('errorContraseñaAct').innerText = "La contraseña actual es incorrecta";
+        return false;
+    } else {
+        document.getElementById('errorContraseñaAct').innerText = ""; // Limpiar mensaje de error si es correcta
+        return true;
+    }
+}
+
 
 document.getElementById('agregar').addEventListener('click', function (event) {
     event.preventDefault();
@@ -68,8 +94,7 @@ document.getElementById('agregar').addEventListener('click', function (event) {
         isValid = false;
     }
 
-    if (contraseñaAct !== "Administrador") {
-        document.getElementById('errorContraseñaAct').innerText = "La contraseña actual es incorrecta";
+    if (!validarContraseñaAnterior(contraseñaAct)) {
         isValid = false;
     }
 
