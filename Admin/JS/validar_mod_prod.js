@@ -12,47 +12,46 @@ document.getElementById('btnAgregar').addEventListener('click', function() {
     // Validación de campos
     let isValid = true;
 
-    // Validar nombre (sin símbolos)
-    if (nombre === "" || /[^a-zA-Z\s]/.test(nombre)) {
-      document.getElementById('errorNombre').innerText = "El nombre no debe contener símbolos.";
-      isValid = false;
-  }
+    // Expresión regular para validar solo letras y espacios
+    const regexNombre = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ\s]+$/;
+    
+    if (nombre === "") {
+        errorNombre.innerText = "Por favor, completa este campo.";
+        isValid = false;
+    } else if (!regexNombre.test(nombre)) {
+        errorNombre.innerText = "Solo se permiten letras y espacios.";
+        isValid = false;
+    }
 
-  // Validación de precio (solo números, sin símbolos y hasta dos decimales)
-  if (precio === "" || isNaN(precio) || precio <= 0 || /[^0-9.]/.test(precio)) {
-      document.getElementById('errorPrecio').innerText = "El precio debe ser un número válido sin símbolos.";
-      isValid = false;
-  } else {
-      // Asegura que el precio tiene máximo dos decimales
-      const precioFloat = parseFloat(precio);
-      if (precioFloat.toFixed(2) !== precioFloat.toString()) {
-          document.getElementById('errorPrecio').innerText = "El precio debe tener como máximo dos decimales.";
-          isValid = false;
-      }
-  }
+    // Expresión regular para validar precios (números enteros o con hasta dos decimales, incluyendo .00)
+    const regexPrecio = /^\d+(\.\d{1,2})?$/;
 
-  if (isValid) {
-      // Si los campos son válidos, abre el modal
-      const modal = new bootstrap.Modal(document.getElementById('modal_confirm'));
-      modal.show();
-  }
+    if (precio === "" || !regexPrecio.test(precio)) {
+        errorPrecio.innerText = "El precio debe ser un número válido con hasta dos decimales.";
+        isValid = false;
+    }
+
+    if (isValid) {
+        // Si los campos son válidos, abre el modal
+        const modal = new bootstrap.Modal(document.getElementById('modal_confirm'));
+        modal.show();
+    }
 });
 
+// Restricción de entrada en el campo "precio"
 document.getElementById("precio").addEventListener("keypress", function(event) {
-  const input = event.target.value;
-  const dotCount = (input.match(/\./g) || []).length;
+    const input = event.target.value;
+    const dotCount = (input.match(/\./g) || []).length;
 
-  // Evita cualquier carácter que no sea número o punto, y solo permite un punto decimal
-  if (!/[0-9.]/.test(event.key) || (event.key === '.' && dotCount >= 1)) {
-      event.preventDefault();
-  }
+    // Permite solo números y un punto decimal
+    if (!/[0-9.]/.test(event.key) || (event.key === '.' && dotCount >= 1)) {
+        event.preventDefault();
+    }
 });
 
-document.getElementById("precio").addEventListener("blur", function(event) {
-  let precio = event.target.value;
-  if (precio) {
-      // Asegura que el precio tenga solo dos decimales al perder el foco
-      const precioFormateado = parseFloat(precio).toFixed(2);
-      event.target.value = precioFormateado;
-  }
+// Restringe la entrada en el campo "nombre" para evitar números y símbolos
+document.getElementById("nombre").addEventListener("keypress", function(event) {
+    if (!/[a-zA-ZÁÉÍÓÚáéíóúñÑ\s]/.test(event.key)) {
+        event.preventDefault();
+    }
 });
