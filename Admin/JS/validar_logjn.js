@@ -1,8 +1,17 @@
-// Función para validar el login del administrador
+
+const contraseñasUsuarios = {
+    "Yesid@gmail.com": "Yessid1!",
+    "Efrain@gmail.com": "Efrain1!",
+    "Trino@gmail.com": "Trino12!",
+    "Guero@gmail.com": "Guero12!"
+};
+
+// Función para validar el usuario
 function validarUsuario() {
-    const usuario = document.getElementById("usuario").value;
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+(?:\.(?!com\.)[a-zA-Z]{2,}|\.com(?!.*\.com))$/;
-    if (usuario.trim() === "") {
+    const usuario = document.getElementById("usuario").value.trim();
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (usuario === "") {
         mostrarError("errorUsuario", "Ingrese un usuario");
         return false;
     } else if (!regex.test(usuario)) {
@@ -14,19 +23,25 @@ function validarUsuario() {
     }
 }
 
-// Función para validar la contraseña
+// Función para validar la contraseña ingresada
 function validarContraseña() {
-    const contraseña = document.getElementById("contraseña").value;
-    if (contraseña.trim() === "") {
-        mostrarError("errorContraseña", "Debe ingresar una contraseña");
+    const usuario = document.getElementById("usuario").value.trim();
+    const contraseñaIngresada = document.getElementById("contraseña").value;
+
+    // Verificar si el usuario existe en la lista
+    if (!(usuario in contraseñasUsuarios)) {
+        mostrarError("errorUsuario", "El usuario no está registrado");
         return false;
-    } else if (contraseña.length < 8) {
-        mostrarError("errorContraseña", "La contraseña debe tener al menos 8 caracteres");
-        return false;
-    } else {
-        ocultarError("errorContraseña");
-        return true;
     }
+
+    // Validar la contraseña asociada al usuario
+    if (contraseñaIngresada !== contraseñasUsuarios[usuario]) {
+        mostrarError("errorContraseña", "Usuario o contraseña incorrectos");
+        return false;
+    }
+
+    ocultarError("errorContraseña");
+    return true;
 }
 
 // Funciones para mostrar y ocultar errores
@@ -38,34 +53,26 @@ function ocultarError(idError) {
     document.getElementById(idError).textContent = "";
 }
 
-// Función para validar el formulario
+// Función para validar el formulario y redirigir si es correcto
 function validarFormulario() {
     const usuarioValido = validarUsuario();
     const contraseñaValida = validarContraseña();
 
     if (usuarioValido && contraseñaValida) {
-        const usuario = document.getElementById("usuario").value;
-        const contraseña = document.getElementById("contraseña").value;
+        window.location.href = "../../Admin/Menú/index.html";
 
-        // Validar las credenciales específicas
-        if (usuario === "123@gmail.com" && contraseña === "Administrador") {
-            window.location.href = "../../Admin/Menú/index.html";
-            document.getElementById("usuario").value = "";
-        } else {
-            mostrarError("errorContraseña", "Usuario o contraseña incorrectos");
-            // Limpiar el campo del correo
-            
-        }
+        // Limpiar los campos después de un login exitoso
+        document.getElementById("usuario").value = "";
+        document.getElementById("contraseña").value = "";
     }
 }
 
 // Event listener para el formulario
-document
-    .getElementById("FormularioLogin")
-    .addEventListener("submit", function (event) {
-        event.preventDefault();
-        validarFormulario();
-    });
+document.getElementById("FormularioLogin").addEventListener("submit", function (event) {
+    event.preventDefault();
+    validarFormulario();
+});
+
 
 // Función para mostrar/ocultar contraseña
 function togglePasswords() {
