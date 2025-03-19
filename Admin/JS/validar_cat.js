@@ -18,9 +18,5 @@ document.getElementById('btnAgregar').addEventListener('click', function(event) 
     if (isValid) {
         const modal = new bootstrap.Modal(document.getElementById('Agregado'));
         modal.show();
-    }
+    }
 });
-
-
-
-

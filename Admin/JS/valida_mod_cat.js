@@ -21,5 +21,5 @@ document.getElementById('btnAgregar').addEventListener('click', function(event) 
     if (isValid) {
         const modal = new bootstrap.Modal(document.getElementById('modal-1'));
         modal.show();
-    }
+    }
 });
