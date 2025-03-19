@@ -20,6 +20,3 @@ document.getElementById('btnAgregar').addEventListener('click', function(event) 
         modal.show();
     }
 });
-
-
-
